@@ -39,18 +39,16 @@
                                 <label class="details-label off">-10%</label>
                             </div>
                             <ul class="details-preview"> 
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                
+                                {% for image in images %}
+                                <li><img src="{{image.image.url}}" alt="product"></li>
+                                {% endfor %}
+                                
                             </ul>
                             <ul class="details-thumb">
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                {% for image in images %}
+                                <li><img src="{{image.image.url}}" alt="product"></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -75,11 +73,13 @@
                             </h3>
                             <p class="details-desc">{{object.subtitle}}</p>
                             <div class="details-list-group">
-                                <label class="details-list-title">tags:{{object.tags.all}}</label>
+                                <label class="details-list-title">tags:</label>
                                 <ul class="details-tag-list">
-                                    <li><a href="#">organic</a></li>
-                                    <li><a href="#">fruits</a></li>
-                                    <li><a href="#">chilis</a></li>
+                                    
+                                    {% for tag in object.tags.all %}
+                                    <li><a href="#">{{tag}}</a></li>
+                                    {% endfor %}
+                                        
                                 </ul>
                             </div>
                             <div class="details-list-group">
