@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'en/css/product-details.css' %}">
+{% endblock css %}
+    
 
 {% block content %}
 
@@ -49,28 +55,6 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <ul class="product-navigation">
-                            <li class="product-nav-prev">
-                                <a href="#">
-                                    <i class="icofont-arrow-left"></i>
-                                    prev product
-                                    <span class="product-nav-popup">
-                                        <img src="images/product/02.jpg" alt="product">
-                                        <small>green chilis</small>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="product-nav-next">
-                                <a href="#">
-                                    next product
-                                    <i class="icofont-arrow-right"></i>
-                                    <span class="product-nav-popup">
-                                        <img src="images/product/03.jpg" alt="product">
-                                        <small>green chilis</small>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
                         <div class="details-content">
                             <h3 class="details-name"><a href="#">existing product name</a></h3>
                             <div class="details-meta">
