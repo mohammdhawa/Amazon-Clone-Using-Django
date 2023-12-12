@@ -7,8 +7,17 @@ from .models import Product, Brand, Review, ProductImages
 class ProductImagesInline(admin.TabularInline):
     model = ProductImages
 
+
+class ReviewProductInline(admin.TabularInline):
+    model = Review
+
 class ProductAdmin(admin.ModelAdmin):
-   inlines = [ProductImagesInline,]
+   inlines = [ProductImagesInline, ReviewProductInline]
+   list_filter = ['id', 'name']
+
+
+
+
 
 admin.site.register(Product, ProductAdmin)
 
