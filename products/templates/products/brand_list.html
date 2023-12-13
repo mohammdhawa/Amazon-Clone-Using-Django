@@ -64,7 +64,7 @@
                             <div class="brand-media">
                                 <img src="{{item.image.url}}" alt="brand">
                                 <div class="brand-overlay">
-                                    <a href="brand-single.html"><i class="fas fa-link"></i></a>
+                                    <a href="{% url 'brand_detail' item.slug %}"><i class="fas fa-link"></i></a>
                                 </div>
                             </div>
                             <div class="brand-meta">

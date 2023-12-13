@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render
 
 from django.views.generic import (ListView, DetailView,
@@ -28,4 +29,15 @@ class ProductDetail(DetailView):
 
 class BrandList(ListView):
     model = Brand
+
+
+
+class BrandDetail(DetailView):
+    model = Brand
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['products'] = Product.objects.filter(brand=self.get_object())
+
+        return context
     
