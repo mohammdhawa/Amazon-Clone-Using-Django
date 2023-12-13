@@ -23,4 +23,9 @@ class ProductDetail(DetailView):
         context["related"] = Product.objects.filter(brand=self.get_object().brand)
         
         return context
+
+
+
+class BrandList(ListView):
+    model = Brand
     
