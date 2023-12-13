@@ -41,6 +41,7 @@ class BrandList(ListView):
 
 class BrandDetail(ListView):
     model = Product
+    paginate_by = 10
     template_name = 'products/brand_detail.html'
 
 
