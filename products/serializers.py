@@ -5,6 +5,7 @@ from .models import Product, Brand
 
 class ProductListSerializer(serializers.ModelSerializer):
 
+    brand = serializers.StringRelatedField()
     class Meta:
         model = Product
         fields = "__all__"
