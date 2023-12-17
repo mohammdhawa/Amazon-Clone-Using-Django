@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Packages
+    "taggit", 
+    'rest_framework',
+
     # My Apps
     'products',
-    "taggit", 
 ]
 
 MIDDLEWARE = [
