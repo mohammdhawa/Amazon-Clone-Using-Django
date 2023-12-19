@@ -1,3 +1,5 @@
+from functools import reduce
+
 from rest_framework import serializers
 
 from .models import Product, Brand
@@ -7,6 +9,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     brand = serializers.StringRelatedField()
     count_reviews = serializers.SerializerMethodField()
+    average_rate = serializers.SerializerMethodField()
     
     class Meta:
         model = Product
@@ -15,6 +18,13 @@ class ProductListSerializer(serializers.ModelSerializer):
     def get_count_reviews(self, object):
         reviews = object.review_roduct.count()
         return reviews
+
+    def get_average_rate(self, object):
+        reviews = object.review_roduct.all()
+        
+        total = sum(item.rate for item in reviews)
+        
+        return format(total/len(reviews), ".1f") if reviews else 0 
 
 
 
@@ -22,14 +32,20 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
     brand = serializers.StringRelatedField()
     count_reviews = serializers.SerializerMethodField()
+    average_rate = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = "__all__"
     
     def get_count_reviews(self, object):
-        reviews = object.review_roduct.count()
+        reviews = object.review_roduct.all().count()
         return reviews
+
+    def get_average_rate(self, object):
+        reviews = object.review_roduct.all()
+        total = sum(item.rate for item in reviews)
+        return format(total/len(reviews), ".1f") if reviews else 0 
 
 
 
