@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Packages
     "taggit", 
     'rest_framework',
+    'django_filters',
 
     # My Apps
     'products',
