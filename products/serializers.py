@@ -2,7 +2,26 @@ from functools import reduce
 
 from rest_framework import serializers
 
-from .models import Product, Brand
+from .models import (Product, Brand, ProductImages, Review)
+
+
+
+class ProductImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductImages
+        fields = ['image']
+
+
+
+class ProductReviewSerializer(serializers.ModelSerializer):
+
+    user = serializers.StringRelatedField()
+
+    class Meta:
+        model = Review
+        fields = ['user', 'review', 'rate', 'created_at']
+
 
 
 class ProductListSerializer(serializers.ModelSerializer):
@@ -33,6 +52,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     brand = serializers.StringRelatedField()
     count_reviews = serializers.SerializerMethodField()
     average_rate = serializers.SerializerMethodField()
+    images = ProductImageSerializer(source='product_image', many=True)
+    reviews = ProductReviewSerializer(source='review_roduct', many=True)
 
     class Meta:
         model = Product
