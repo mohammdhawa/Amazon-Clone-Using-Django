@@ -1,13 +1,14 @@
 from django.urls import path
 
 from .views import (ProductList, ProductDetail,
-                    BrandList, BrandDetail)
+                    BrandList, BrandDetail, mydebug)
 
 from .api import (ProductListAPI, ProductDetailAPI,
                   BrandListAPI, BrandDetailAPI)
 
 
 urlpatterns = [
+    path('debug', mydebug, name='debug'),
     path('brands', BrandList.as_view(), name='brand_list'),
     path('brands/<slug:slug>', BrandDetail.as_view(), name='brand_detail'),
     path('', ProductList.as_view(), name='products'),
