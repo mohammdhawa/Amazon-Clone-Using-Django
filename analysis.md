@@ -45,7 +45,6 @@
 - addresses:
   - type (home, office, business, academy, other)
   - address
-- sd
 ### Functions:
 - auth
 - dashboard
