@@ -42,6 +42,9 @@ class Product(models.Model):
                 queryset = Product.objects.filter(slug=self.slug)
         super(Product, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product, verbose_name=_('product'), related_name='product_image', on_delete=models.CASCADE)
@@ -76,4 +79,7 @@ class Review(models.Model):
     review = models.TextField(_('review'), max_length=1000)
     rate = models.IntegerField(_('rate'), choices=RATE_CHOICES)
     created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.user} - {self.product} - {self.rate}"
 
