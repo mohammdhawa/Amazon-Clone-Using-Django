@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.db import models
 from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -25,6 +26,20 @@ class Product(models.Model):
     description = models.TextField(max_length=50000)
     brand = models.ForeignKey('Brand', on_delete=models.SET_NULL, null=True)
     tags = TaggableManager()
+    slug = models.SlugField(unique=True, max_length=100)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+            # check for uniqueness
+            original_slug = self.slug
+            queryset = Product.objects.filter(slug=original_slug)
+            count = 1
+            while queryset.exists():
+                self.slug = f"{original_slug}-{count}"
+                count += 1
+                queryset = Product.objects.filter(slug=self.slug)
+        super(Product, self).save(*args, **kwargs)
 
 
 class ProductImages(models.Model):
@@ -35,6 +50,20 @@ class ProductImages(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='brand')
+    slug = models.SlugField(unique=True, max_length=100)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+            # check for uniqueness
+            original_slug = self.slug
+            queryset = Product.objects.filter(slug=original_slug)
+            count = 1
+            while queryset.exists():
+                self.slug = f"{original_slug}-{count}"
+                count += 1
+                queryset = Product.objects.filter(slug=self.slug)
+        super(Brand, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
