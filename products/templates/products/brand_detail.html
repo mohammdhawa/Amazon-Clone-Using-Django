@@ -7,12 +7,29 @@
 
 {% block body %}
 
+    <!--=====================================
+                    BANNER PART START
+        =======================================-->
+        <section class="single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
+            <div class="container">
+                <h2>Brand Single</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="brand-list.html">brand-list</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">brand-single</li>
+                </ol>
+            </div>
+        </section>
         <!--=====================================
+                    BANNER PART END
+        =======================================-->
+
+    <!--=====================================
                   BRAND SINGLE PART START
         =======================================-->
         <div class="brand-single">
-            <a href="#"><img src="{{ object.image.url }}" alt="brand"></a>
-            <a href="#"><h3>{{ object.name }}</h3></a>
+            <a href="#"><img src="{{ brand.image.url }}" alt="brand"></a>
+            <a href="#"><h3>{{ brand.name}}</h3></a>
             <ul>
                 <li class="fas fa-star active"></li>
                 <li class="fas fa-star active"></li>
@@ -57,7 +74,7 @@
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-5">
-                    {% for product in products %}
+                    {% for product in object_list %}
                     <div class="col">
                         <div class="product-card">
                             <div class="product-media">
