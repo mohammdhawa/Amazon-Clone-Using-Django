@@ -11,6 +11,8 @@ class ProductImagesInline(admin.TabularInline):
 
 class ProductImagesAdmin(admin.ModelAdmin):
     inlines = [ProductImagesInline]
+    search_fields = ['name', 'sku']
+    list_filter = ['flag']
 
 
 admin.site.register(Product, ProductImagesAdmin)
