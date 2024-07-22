@@ -61,12 +61,12 @@ class Brand(models.Model):
             self.slug = slugify(self.name)
             # check for uniqueness
             original_slug = self.slug
-            queryset = Product.objects.filter(slug=original_slug)
+            queryset = Brand.objects.filter(slug=original_slug)
             count = 1
             while queryset.exists():
                 self.slug = f"{original_slug}-{count}"
                 count += 1
-                queryset = Product.objects.filter(slug=self.slug)
+                queryset = Brand.objects.filter(slug=self.slug)
         super(Brand, self).save(*args, **kwargs)
 
     def __str__(self):
