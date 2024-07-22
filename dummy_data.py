@@ -76,4 +76,4 @@ def seed_reviews(n):
 # seed_brand(110)
 # seed_product(500)
 # seed_users(10)
-seed_reviews(200)
+# seed_reviews(200)
