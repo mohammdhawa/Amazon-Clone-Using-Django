@@ -8,6 +8,7 @@ from django.views.generic import (ListView, DetailView)
 
 class ProductListView(ListView):
     model = Product
+    paginate_by = 48
 
 
 class ProductDetailView(DetailView):
@@ -23,6 +24,7 @@ class ProductDetailView(DetailView):
 
 class BrandListView(ListView):
     model = Brand
+    paginate_by = 50
 
 
 # class BrandDetailView(DetailView):
@@ -36,6 +38,7 @@ class BrandListView(ListView):
 class BrandDetailView(ListView):
     model = Product
     template_name = 'products/brand_detail.html'
+    paginate_by = 48
 
     def get_queryset(self):
         brand = Brand.objects.get(slug=self.kwargs['slug'])
