@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Used Packages
     'taggit',
+    'rest_framework',
 
     # My Apps
     "products.apps.ProductsConfig",
