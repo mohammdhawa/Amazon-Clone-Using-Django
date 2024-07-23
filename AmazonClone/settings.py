@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Used Packages
     'taggit',
     'rest_framework',
+    'django_filters',
 
     # My Apps
     "products.apps.ProductsConfig",
@@ -48,8 +49,9 @@ INSTALLED_APPS = [
 
 # Rest API
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 50
+    'PAGE_SIZE': 50,
 }
 
 MIDDLEWARE = [

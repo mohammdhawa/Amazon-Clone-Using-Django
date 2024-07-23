@@ -3,12 +3,15 @@ from .models import (Product, Brand, Review, ProductImages)
 from .serializers import (ProductListSerializer, ProductDetailSerializer,
                           BrandListSerializer, BrandDetailSerializer)
 from .pagination import ProductPageNumberPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     pagination_class = ProductPageNumberPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['flag', 'brand']
 
 
 class ProductDetailAPI(generics.RetrieveAPIView):
