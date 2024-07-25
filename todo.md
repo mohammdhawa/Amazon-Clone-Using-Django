@@ -1,7 +1,7 @@
  ## Products:
  - queryset API: models
  - add reviews
- - Custom Filter , Code refactor
+ - Custom Filter , Code refactor 
 
 
 ## Orders:

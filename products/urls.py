@@ -1,10 +1,12 @@
 from django.urls import path
 from .views import (ProductListView, ProductDetailView,
-                    BrandListView, BrandDetailView)
+                    BrandListView, BrandDetailView,
+                    mydebug)
 from . import api
 
 
 urlpatterns = [
+    path('debug', mydebug, name="mydebug"),
     path('brands', BrandListView.as_view(), name='brand-list'),
     path('brands/<slug:slug>', BrandDetailView.as_view(), name='brand-detail'),
     path('', ProductListView.as_view(), name='product-list'),
