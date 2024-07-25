@@ -8,7 +8,7 @@ from django.db.models import (Q, F, Avg, Count, Sum,
 
 def mydebug(request):
 
-    # data = Product.objects.all()
+    data = Product.objects.all()
 
     # Columns with numeric data
     # data = Product.objects.filter(price=20)
@@ -105,7 +105,7 @@ def mydebug(request):
     field to each instance of the queryset.
     '''
     # data = Product.objects.annotate(is_new=Value(0))
-    data = Product.objects.annotate(price_with_tax=F('price')*1.2)
+    # data = Product.objects.annotate(price_with_tax=F('price')*1.2)
 
     return render(request, 'products/debug.html', {'data': data})
 
@@ -131,6 +131,7 @@ class ProductDetailView(DetailView):
 class BrandListView(ListView):
     model = Brand
     paginate_by = 50
+    queryset = Brand.objects.annotate(product_count=Count('product_brand'))
 
 
 # class BrandDetailView(DetailView):
@@ -153,5 +154,5 @@ class BrandDetailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['brand'] = Brand.objects.get(slug=self.kwargs['slug'])
+        context['brand'] = Brand.objects.filter(slug=self.kwargs['slug']).annotate(product_count=Count('product_brand'))[0]
         return context
