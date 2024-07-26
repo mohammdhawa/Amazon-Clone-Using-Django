@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
     # My Apps
     "products.apps.ProductsConfig",
+    "settings.apps.SettingsConfig",
+
 ]
 
 # Rest API
