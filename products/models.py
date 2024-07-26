@@ -46,10 +46,12 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    # @property
     def review_count(self):
         reviews = self.review_product.all().count()
         return reviews
 
+    # @property
     def avg_rate(self):
         reviews = self.review_product.all()
 
