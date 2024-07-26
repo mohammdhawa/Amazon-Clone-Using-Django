@@ -89,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'settings.settings_context_processor.get_settings_context', # now in every request when it executes it will call this function
             ],
         },
     },
