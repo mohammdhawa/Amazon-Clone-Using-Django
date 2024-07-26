@@ -46,8 +46,20 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    def mahmoud(self):
-        pass
+    def review_count(self):
+        reviews = self.review_product.all().count()
+        return reviews
+
+    def avg_rate(self):
+        reviews = self.review_product.all()
+
+        if not reviews:
+            return 0
+
+        total = sum(review.rate for review in reviews)
+        avg = round(total / len(reviews), 1)
+
+        return avg
 
     class Meta:
         ordering = ['-id']
