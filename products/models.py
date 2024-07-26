@@ -46,12 +46,12 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    # @property
+    @property
     def review_count(self):
         reviews = self.review_product.all().count()
         return reviews
 
-    # @property
+    @property
     def avg_rate(self):
         reviews = self.review_product.all()
 
@@ -64,7 +64,7 @@ class Product(models.Model):
         return avg
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['id']
         verbose_name = 'product'
         verbose_name_plural = 'products'
 
