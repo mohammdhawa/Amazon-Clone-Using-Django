@@ -4,8 +4,10 @@ from .models import (Product, ProductImages,
 from django.views.generic import (ListView, DetailView)
 from django.db.models import (Q, F, Avg, Count, Sum,
                               Min, Max, Value)
+from django.views.decorators.cache import cache_page
 
 
+# @cache_page(60 * 2)
 def mydebug(request):
 
     data = Product.objects.all()
