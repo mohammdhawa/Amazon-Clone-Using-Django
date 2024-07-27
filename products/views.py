@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import (Product, ProductImages,
                      Brand, Review)
 from django.views.generic import (ListView, DetailView)
 from django.db.models import (Q, F, Avg, Count, Sum,
                               Min, Max, Value)
 from django.views.decorators.cache import cache_page
+from django.contrib.auth.decorators import login_required
 
 
 # @cache_page(60 * 2)
@@ -136,14 +137,6 @@ class BrandListView(ListView):
     queryset = Brand.objects.annotate(product_count=Count('product_brand'))
 
 
-# class BrandDetailView(DetailView):
-#     model = Brand
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['products'] = Product.objects.filter(brand=self.get_object())
-#         return context
-
 class BrandDetailView(ListView):
     model = Product
     template_name = 'products/brand_detail.html'
@@ -158,3 +151,18 @@ class BrandDetailView(ListView):
         context = super().get_context_data(**kwargs)
         context['brand'] = Brand.objects.filter(slug=self.kwargs['slug']).annotate(product_count=Count('product_brand'))[0]
         return context
+
+
+def add_review(request, slug):
+    product = Product.objects.get(slug=slug)
+    user = request.user
+
+    if request.method == 'POST':
+        review = request.POST['review']
+        rate = request.POST['rating']
+
+        created_review = Review(user=user, product=product, rate=rate, review=review)
+        created_review.save()
+        return redirect('product-detail', slug=slug)
+
+    return redirect('product-detail', slug=slug)

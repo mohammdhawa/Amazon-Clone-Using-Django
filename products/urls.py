@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (ProductListView, ProductDetailView,
                     BrandListView, BrandDetailView,
-                    mydebug)
+                    mydebug, add_review)
 from . import api
 
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('brands/<slug:slug>', BrandDetailView.as_view(), name='brand-detail'),
     path('', ProductListView.as_view(), name='product-list'),
     path('<slug:slug>', ProductDetailView.as_view(), name='product-detail'),
+    path('<slug:slug>/add-review', add_review, name='add-review'),
 
     # api urls
     path('api/list', api.ProductListAPI.as_view(), name='product-list-api'),
