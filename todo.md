@@ -1,10 +1,6 @@
- ## Products:
- - home page 
- - add reviews
-
 
 ## Orders:
-- design
+- design models
 - add views of orders
 - add cart
 - add checkout
@@ -27,3 +23,4 @@
 - Caching
 - Linting
 - Deploy
+- Django default permissions
