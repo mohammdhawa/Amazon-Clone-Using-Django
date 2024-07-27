@@ -50,3 +50,20 @@
 - dashboard
 - profile
 - edit profile
+
+---
+
+App Orders:
+- address
+- product
+- brand
+- price
+- quantity
+- order_time
+- delivery_time
+- order_id
+- total item
+- discount
+- delivery fee
+- status ['Recieved', 'Processed', 'Shipped', 'Delivered']
+- 

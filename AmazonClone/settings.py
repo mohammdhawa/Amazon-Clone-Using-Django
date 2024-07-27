@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     # My Apps
     "products.apps.ProductsConfig",
     "settings.apps.SettingsConfig",
+    "orders.apps.OrdersConfig",
+    "accounts.apps.AccountsConfig",
 
 ]
 
