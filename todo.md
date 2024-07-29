@@ -1,8 +1,5 @@
 
 ## Orders:
-- design models
-- add views of orders
-- add cart
 - add checkout
 - add coupons
 - API Orders, Cart
