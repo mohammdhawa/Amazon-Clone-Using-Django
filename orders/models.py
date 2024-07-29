@@ -51,7 +51,7 @@ class Cart(models.Model):
     def cart_total(self):
         total = 0
         for item in self.cart_detail.all():
-            total += item.quantity * item.total_price
+            total += item.total_price
         return round(total, 2)
 
 

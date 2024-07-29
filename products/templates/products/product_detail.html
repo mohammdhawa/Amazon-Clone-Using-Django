@@ -107,13 +107,24 @@
                                 </ul>
                             </div>
                             <div class="details-add-group">
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
-                                    <span>add to cart</span>
-                                </button>
+                                <form method="post" class="row" action="{% url 'add_to_cart' %}">
+                                    {% csrf_token %}
+                                    <div class="col-lg-6">
+                                        <input class="action-input" title="Quantity Number" type="number" name="quantity" value="1">
+                                        <input type="hidden" value="{{ product.id }}" name="product_id">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <button class="product-add" title="Add to Cart">
+                                        <i class="fas fa-shopping-basket"></i>
+                                        <span>add to cart</span>
+                                        </button>
+                                    </div>
+                                </form>
+
+
                                 <div class="product-action">
                                     <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
+
                                     <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
                                 </div>
                             </div>
@@ -256,7 +267,7 @@
                                     <a href="product-video.html">({{ product.review_count }})</a>
                                 </div>
                                 <h6 class="product-name">
-                                    <a href="product-video.html">{{ product.name }}</a>
+                                    <a href="{% url 'product-detail' product.slug %}">{{ product.name }}</a>
                                 </h6>
                                 <h6 class="product-price">
                                     <span>${{ product.price }}</span>
