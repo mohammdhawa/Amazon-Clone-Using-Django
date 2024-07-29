@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 # @cache_page(60 * 2)
 def mydebug(request):
 
-    data = Product.objects.all()
+    data = Product.objects.order_by('-id')
 
     # Columns with numeric data
     # data = Product.objects.filter(price=20)

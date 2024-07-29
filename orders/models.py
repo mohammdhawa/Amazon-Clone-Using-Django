@@ -23,6 +23,7 @@ class Order(models.Model):
     delivery_time = models.DateTimeField(null=True, blank=True)
     delivery_address = models.ForeignKey(Adress, related_name='delivery_address', on_delete=models.SET_NULL, null=True)
     coupon = models.ForeignKey('Coupon', related_name='order_coupon', on_delete=models.SET_NULL, null=True, blank=True)
+    total = models.FloatField(null=True, blank=True)
     total_with_coupon = models.FloatField(null=True, blank=True)
 
 
@@ -30,8 +31,8 @@ class OrderDetail(models.Model):
     order = models.ForeignKey(Order, related_name='order_detail', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='order_detail_product', on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField()
-    price = models.FloatField()
-    total_price = models.FloatField()
+    price = models.FloatField(null=True, blank=True)
+    total_price = models.FloatField(null=True, blank=True)
 
 
 CART_STATUS_CHOICES = (
