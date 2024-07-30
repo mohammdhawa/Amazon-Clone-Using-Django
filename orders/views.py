@@ -39,6 +39,9 @@ def checkout(request):
                 cart.total_with_coupon = sub_total
                 cart.save()
 
+                coupon.quantity -= 1
+                coupon.save()
+
                 context = {
                     'cart_detail': cart_detail,
                     'delivery_fee': delivery_fee,
