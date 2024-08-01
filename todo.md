@@ -1,8 +1,4 @@
 
-## Orders:
-- API Orders, Cart
-
-
 ## Users:
 - design models
 - add templates
@@ -11,6 +7,7 @@
 
 ## Intermediate
 - Docker
+- Translation
 - Celery
 - Redis
 - payment
