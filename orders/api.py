@@ -5,7 +5,6 @@ import datetime
 
 from django.contrib.auth.models import User
 
-
 from .serializers import (OrderSerializer, OrderDetailSerializer,
                           CartSerializer, CartDetailSerializer)
 from .models import (Order, OrderDetail,
@@ -43,9 +42,9 @@ class OrderDetailAPI(generics.RetrieveAPIView):
 
 class ApplyCouponAPI(generics.GenericAPIView):
 
-    def post(self, request, *args, **kwargs): # function receive post request
-        user = User.objects.get(username=self.kwargs['username']) # url
-        coupon = get_object_or_404(Coupon, code=request.data['coupon_code']) # request body
+    def post(self, request, *args, **kwargs):  # function receive post request
+        user = User.objects.get(username=self.kwargs['username'])  # url
+        coupon = get_object_or_404(Coupon, code=request.data['coupon_code'])  # request body
         delivery_fee = DeliveryFee.objects.last().fee
         cart = Cart.objects.get(user=user, status='Inprogress')
 
@@ -116,5 +115,31 @@ class CreateOrderAPI(generics.GenericAPIView):
 
 
 class CartCreateUpdateDeleteAPI(generics.GenericAPIView):
-    pass
 
+    def get(self, request, *args, **kwargs):  # To get or Create
+        user = User.objects.get(username=self.kwargs['username'])
+        cart, created = Cart.objects.get_or_create(user=user, status='Inprogress')
+        data = CartDetailSerializer(cart).data
+        return Response({'cart': data})
+
+    def post(self, request, *args, **kwargs):  # To Update
+        user = User.objects.get(username=self.kwargs['username'])
+        product = Product.objects.get(id=request.data['product_id'])
+        quantity = int(request.data['quantity'])
+
+        cart = Cart.objects.get(user=user, status='Inprogress')
+        cart_detail, created = Cart.objects.get_or_create(user=user, product=product)
+
+        cart_detail.quantity = quantity
+        cart_detail.total_price = round(product.price * cart_detail, 2)
+        cart_detail.save()
+
+        return Response({'message': 'Cart was updated successfully!'}, status=status.HTTP_201_CREATED)
+
+    def delete(self, request, *args, **kwargs):  # To Delete from cart
+        user = User.objects.get(username=self.kwargs['username'])
+        # cart = Cart.objects.get(user=user, status='Inprogress')
+        product = CartDetail.objects.get(id=request.data['item_id'])
+        product.delete()
+
+        return Response({'message': "Order Deleted Successfully!"}, status=status.HTTP_200_OK)
