@@ -16,3 +16,6 @@
 - Linting
 - Deploy
 - Django default permissions
+
+## Interview
+- multiple type user
