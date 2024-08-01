@@ -107,6 +107,7 @@
                                 </ul>
                             </div>
                             <div class="details-add-group">
+                                {% if product.quantity > 0 %}
                                 <form method="post" class="row" action="{% url 'add_to_cart' %}">
                                     {% csrf_token %}
                                     <div class="col-lg-6">
@@ -120,6 +121,10 @@
                                         </button>
                                     </div>
                                 </form>
+                                {% else %}
+                                <h2>Out of Stock</h2>
+                                {% endif %}
+
 
 
                                 <div class="product-action">
