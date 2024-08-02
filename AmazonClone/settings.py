@@ -172,5 +172,13 @@ AUTHENTICATION_BACKENDS = [
     'accounts.backend.EmailOrUsernameLogin',
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Your email host, e.g., 'smtp.gmail.com'
+EMAIL_PORT = 587  # Usually 587 for TLS
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False  # Usually False if TLS is used
+EMAIL_HOST_USER = 'ismekbektop@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'jxlxyaemdrotwhan'  # Your email password
+# DEFAULT_FROM_EMAIL = 'your_email@example.com'
