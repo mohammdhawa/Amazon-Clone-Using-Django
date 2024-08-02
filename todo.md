@@ -1,8 +1,7 @@
 
 ## Users:
-- design models
 - add templates
-- API
+- API: library
 
 
 ## Intermediate
