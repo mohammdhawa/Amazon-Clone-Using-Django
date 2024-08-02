@@ -12,6 +12,9 @@ def signup(request):
         - send email: code
         - redirect: activate
     '''
+    if request.user.is_authenticated:
+        return redirect('/')
+
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
