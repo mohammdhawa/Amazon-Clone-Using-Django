@@ -32,7 +32,7 @@ def signup(request):
                 fail_silently=False,
             )
 
-            return redirect('account_activate', str=username)
+            return redirect(f'/accounts/{username}/activate')
     else:
         form = SignupForm()
 
@@ -56,7 +56,6 @@ def user_activate(request, username):
                 profile.save()
 
                 return redirect('login')
-
 
     else:
         form = UserActivateForm()
