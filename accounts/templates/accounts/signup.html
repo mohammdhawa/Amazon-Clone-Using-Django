@@ -1,7 +1,44 @@
+{% extends 'auth_base.html' %}
+{% load django_bootstrap5 %}
 
+{% block body %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Signup">
-</form>
+            <!--=====================================
+                    USER FORM PART START
+        =======================================-->
+        <section class="user-form-part">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
+                        <div class="user-form-logo">
+                            <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+                        </div>
+                        <div class="user-form-card">
+                            <div class="user-form-title">
+                                <h2>Join Now!</h2>
+                                <p>Setup A New Account In A Minute</p>
+                            </div>
+                                <form class="user-form" method="post">
+                                    {% csrf_token %}
+                                    {% bootstrap_form form %}
+                                    <div class="form-button">
+                                        <button type="submit">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="user-form-remind">
+                            <p>Already Have An Account?<a href="login.html">login here</a></p>
+                        </div>
+                        <div class="user-form-footer">
+                            <p>Greeny | &COPY; Copyright by <a href="#">Mironcoder</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                    USER FORM PART END
+        =======================================-->
+
+{% endblock body %}
