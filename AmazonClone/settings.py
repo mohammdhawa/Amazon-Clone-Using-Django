@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "accounts.apps.AccountsConfig",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,12 +46,13 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     "debug_toolbar",
+    "django_bootstrap5",
 
     # My Apps
     "products.apps.ProductsConfig",
     "settings.apps.SettingsConfig",
     "orders.apps.OrdersConfig",
-    "accounts.apps.AccountsConfig",
+
 
 ]
 
@@ -172,8 +175,10 @@ AUTHENTICATION_BACKENDS = [
     'accounts.backend.EmailOrUsernameLogin',
 ]
 
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
 
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Your email host, e.g., 'smtp.gmail.com'
 EMAIL_PORT = 587  # Usually 587 for TLS
