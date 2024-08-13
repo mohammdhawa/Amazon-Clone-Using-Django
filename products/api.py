@@ -5,6 +5,7 @@ from .serializers import (ProductListSerializer, ProductDetailSerializer,
 from .pagination import ProductPageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductListAPI(generics.ListAPIView):
@@ -15,6 +16,7 @@ class ProductListAPI(generics.ListAPIView):
     filterset_fields = ['flag', 'brand']
     search_fields = ['name', 'sku']
     ordering_fields = ['price']
+    permission_classes = [IsAuthenticated]
 
 
 class ProductDetailAPI(generics.RetrieveAPIView):
