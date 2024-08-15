@@ -1,16 +1,17 @@
 
 ## Users:
-- add templates
 - API: library
 
 
 ## Intermediate
-- Docker
+- chartJS
 - Translation
+- Docker
 - Celery
 - Redis
 - payment
 - Ajax
+- JS
 - Caching
 - Linting
 - Deploy
