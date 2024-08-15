@@ -12,7 +12,7 @@ urlpatterns = [
     # API urls
     path('api/<str:username>/orders', OrderListAPI.as_view(), name='order_list_api'),
     path('api/<str:username>/orders/<int:pk>', OrderDetailAPI.as_view(), name='order_detail_api'),
-    path('api/<str:username>/apply-coupon/', ApplyCouponAPI.as_view(), name='apply_coupon_api'),
+    path('api/<str:username>/apply-coupon', ApplyCouponAPI.as_view(), name='apply_coupon_api'),
     path('api/<str:username>/cart', CartCreateUpdateDeleteAPI.as_view(), name='cart_create_update_delete_api'),
     path('api/<str:username>/orders/create', CreateOrderAPI.as_view(), name='create_order_api'),
 ]

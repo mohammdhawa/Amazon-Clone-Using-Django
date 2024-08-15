@@ -70,9 +70,10 @@ class Coupon(models.Model):
     discount = models.FloatField()
 
     def save(self, *args, **kwargs):
-        week = timezone.timedelta(days=7)
-        self.end_date = self.start_date + week
-        super(Coupon, self).save(*args, **kwargs)
+        if not self.end_date:
+            week = timezone.timedelta(days=7)
+            self.end_date = self.start_date + week
+            super(Coupon, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.code} - {self.start_date} - {self.end_date}"

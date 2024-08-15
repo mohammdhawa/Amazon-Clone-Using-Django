@@ -29,5 +29,4 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['id', 'user', 'status', 'coupon',
-                  'total_with_coupon', 'cart_total']
+        fields = '__all__'
