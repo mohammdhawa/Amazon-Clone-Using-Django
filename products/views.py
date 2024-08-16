@@ -119,6 +119,10 @@ class ProductListView(ListView):
     model = Product
     paginate_by = 48
 
+    # def get_queryset(self):
+    #     queryset = super().get_queryset().filter(quantity__gt=0)
+    #     return queryset
+
 
 class ProductDetailView(DetailView):
     model = Product

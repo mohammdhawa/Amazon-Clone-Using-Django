@@ -103,7 +103,7 @@
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
                     {% for item in sale_products %}
                     <div class="col">
-                        <div class="product-card">
+                        <div class="product-card {% if product.quantity == 0 %}product-disable{% endif %}">
                             <div class="product-media">
                                 <div class="product-label">
                                     <label class="label-text sale">{{ item.flag }}</label>
@@ -262,7 +262,7 @@
                         <ul class="new-slider slider-arrow">
                             {% for item in new_products %}
                             <li>
-                                <div class="product-card">
+                                <div class="product-card {% if product.quantity == 0 %}product-disable{% endif %}">
                                     <div class="product-media">
                                         <div class="product-label">
                                             <label class="label-text new">{{ item.flag }}</label>
@@ -366,7 +366,7 @@
                 <div class="tab-pane fade show active" id="top-order">
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
                         <div class="col">
-                            <div class="product-card">
+                            <div class="product-card ">
                                 <div class="product-media">
                                     <div class="product-label">
                                         <label class="label-text order">314</label>

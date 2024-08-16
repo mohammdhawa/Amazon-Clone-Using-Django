@@ -245,7 +245,7 @@
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
                     {% for product in related %}
                     <div class="col">
-                        <div class="product-card">
+                        <div class="product-card {% if product.quantity == 0 %}product-disable{% endif %}">
                             <div class="product-media">
                                 <div class="product-label">
                                     <label class="label-text sale">{{ product.flag }}</label>
