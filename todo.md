@@ -1,6 +1,7 @@
 
 ## Users:
-- API: library
+- Out Of Stock: admin
+- API : library : JWT
 
 
 ## Intermediate
