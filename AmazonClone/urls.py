@@ -41,6 +41,7 @@ urlpatterns = [
     # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api-auth/', include('dj_rest_auth.urls')),
     path('api-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path("i18n/", include("django.conf.urls.i18n")),
     path('products/', include('products.urls')),
     path('orders/', include('orders.urls')),
     path('', include('settings.urls')),

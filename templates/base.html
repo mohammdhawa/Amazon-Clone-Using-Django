@@ -1,6 +1,8 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" {% if LANGUAGE_CODE == 'ar' %}dir="rtl"{% endif %}>
     <head>
         <!--=====================================
                     META TAG PART START
@@ -28,6 +30,7 @@
         <!--=====================================
                     CSS LINK PART START
         =======================================-->
+        {% if LANGUAGE_CODE == 'en' %}
         <!-- FAVICON -->
         <link rel="icon" href="{% static 'en/images/favicon.png' %}">
 
@@ -44,9 +47,32 @@
 
         <!-- CUSTOM -->
         <link rel="stylesheet" href="{% static 'en/css/main.css' %}">
+    
+        {% else %}
+        <!-- FAVICON -->
+        <link rel="icon" href="{% static 'ar/images/favicon.png' %}">
+
+        <!-- FONTS -->
+        <link rel="stylesheet" href="{% static 'ar/fonts/flaticon/flaticon.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/fonts/icofont/icofont.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/fonts/fontawesome/fontawesome.min.css' %}">
+
+        <!-- VENDOR -->
+        <link rel="stylesheet" href="{% static 'ar/vendor/venobox/venobox.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/vendor/slickslider/slick.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/vendor/niceselect/nice-select.min.css' %}">
+        <link rel="stylesheet" href="{% static 'ar/vendor/bootstrap/bootstrap.min.css' %}">
+
+        <!-- CUSTOM -->
+        <link rel="stylesheet" href="{% static 'ar/css/main.css' %}">
+        {% endif %}
         
         {% block css %}
+            {% if LANGUAGE_CODE == 'en' %}
             <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
+            {% else %}
+            <link rel="stylesheet" href="{% static 'ar/css/index.css' %}">
+            {% endif %}
         {% endblock css %}
         <!--=====================================
                     CSS LINK PART END
@@ -71,11 +97,20 @@
                         <div class="header-top-select">
                             <div class="header-select">
                                 <i class="icofont-world"></i>
-                                <select class="select">
-                                    <option value="english" selected>english</option>
-                                    <option value="bangali">bangali</option>
-                                    <option value="arabic">arabic</option>
-                                </select>
+                                <form action="{% url 'set_language' %}" method="post" id="language-form" style="display:inline-block;">
+                                    {% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                                    <select name="language" class="select" onchange="document.getElementById('language-form').submit();">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                                {{ language.name_local }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -158,33 +193,33 @@
                         <div class="navbar-content">
                             <ul class="navbar-list">
                                 <li class="navbar-item dropdown">
-                                    <a class="navbar-link" href="{% url 'home' %}">home</a>
+                                    <a class="navbar-link" href="{% url 'home' %}">{% translate 'home' %}</a>
                                 </li>
                                 <li class="navbar-item dropdown-megamenu">
-                                    <a class="navbar-link" href="{% url 'product-list' %}">shop</a>
+                                    <a class="navbar-link" href="{% url 'product-list' %}">{% translate 'products' %}</a>
                                 </li>
                                 <li class="navbar-item dropdown-megamenu">
-                                    <a class="navbar-link" href="{% url 'brand-list' %}">brands</a>
+                                    <a class="navbar-link" href="{% url 'brand-list' %}">{% translate 'brands' %}</a>
                                 </li>
                                 <li class="navbar-item dropdown">
-                                    <a class="navbar-link" href="{% url 'order_list' %}">orders</a>
+                                    <a class="navbar-link" href="{% url 'order_list' %}">{% translate 'orders' %}</a>
                                 </li>
                                 <li class="navbar-item dropdown">
-                                    <a class="navbar-link" href="#">dashoboard</a>
+                                    <a class="navbar-link" href="{% url 'dashboard' %}">{% translate 'dashoboard' %}</a>
                                 </li>
                             </ul>
                             <div class="navbar-info-group">
                                 <div class="navbar-info">
                                     <i class="icofont-ui-touch-phone"></i>
                                     <p>
-                                        <small>call us</small>
+                                        <small>{% translate 'call us' %}</small>
                                         <span>{{ settings_data.call_us }}</span>
                                     </p>
                                 </div>
                                 <div class="navbar-info">
                                     <i class="icofont-ui-email"></i>
                                     <p>
-                                        <small>email us</small>
+                                        <small>{% translate 'email us' %}</small>
                                         <span>{{ settings_data.email_us }}</span>
                                     </p>
                                 </div>
@@ -871,6 +906,7 @@
         <!--=====================================
                     JS LINK PART START
         =======================================-->
+        {% if LANGUAGE_CODE == 'en' %}
         <!-- VENDOR -->
         <script src="{% static 'en/vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
         <script src="{% static 'en/vendor/bootstrap/popper.min.js' %}"></script>
@@ -887,6 +923,24 @@
         <script src="{% static 'en/js/venobox.js' %}"></script>
         <script src="{% static 'en/js/slick.js' %}"></script>
         <script src="{% static 'en/js/main.js' %}"></script>
+        {% else %}
+        <!-- VENDOR -->
+        <script src="{% static 'ar/vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/bootstrap/popper.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/bootstrap/bootstrap.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/countdown/countdown.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/niceselect/nice-select.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/slickslider/slick.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/venobox/venobox.min.js' %}"></script>
+
+        <!-- CUSTOM -->
+        <script src="{% static 'ar/js/nice-select.js' %}"></script>
+        <script src="{% static 'ar/js/countdown.js' %}"></script>
+        <script src="{% static 'ar/js/accordion.js' %}"></script>
+        <script src="{% static 'ar/js/venobox.js' %}"></script>
+        <script src="{% static 'ar/js/slick.js' %}"></script>
+        <script src="{% static 'ar/js/main.js' %}"></script>
+        {% endif %}
         <!--=====================================
                     JS LINK PART END
         =======================================-->
