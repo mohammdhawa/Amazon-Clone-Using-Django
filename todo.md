@@ -2,11 +2,10 @@
 ## Users:
 - out of stock : admin
 - admin customization
+- app_name & brands translation
 
 
 ## Intermediate
-- chartJS
-- Translation
 - Docker
 - Celery
 - Redis
