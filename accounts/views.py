@@ -3,6 +3,8 @@ from .forms import SignupForm, UserActivateForm
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .models import Profile
+from products.models import (Product, Brand, Review)
+from orders.models import Order
 
 # Create your views here.
 
@@ -64,3 +66,28 @@ def user_activate(request, username):
         form = UserActivateForm()
 
     return render(request, 'accounts/activate.html', {'form': form})
+
+
+def dashboard(request):
+    products_count = Product.objects.count()
+    brands_count = Brand.objects.count()
+    reviews_count = Review.objects.count()
+    orders_count = Order.objects.count()
+    users_count = User.objects.count()
+
+    new_prodcucts = Product.objects.filter(flag='New').count()
+    sale_products = Product.objects.filter(flag='Sale').count()
+    feature_products = Product.objects.filter(flag='Feature').count()
+
+    context = {
+        'products_count': products_count,
+        'brands_count': brands_count,
+        'reviews_count': reviews_count,
+        'orders_count': orders_count,
+        'users_count': users_count,
+        'new_prodcucts': new_prodcucts,
+        'sale_products': sale_products,
+        'feature_products': feature_products,
+    }
+
+    return render(request, 'accounts/dashboard.html', context)
